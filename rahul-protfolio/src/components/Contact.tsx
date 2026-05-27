@@ -78,25 +78,25 @@ const Contact = () => {
     {
       icon: Phone,
       label: "Phone",
-      value: "785805-9990",
-      href: "tel:7858059990",
+      value: "+91 7858059990",
+      href: "tel:+917858059990",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      value: "in/rk1017",
+      value: "linkedin.com/in/rk1017",
       href: "https://linkedin.com/in/rk1017",
     },
     {
       icon: Github,
       label: "GitHub",
-      value: "Rah7858",
+      value: "github.com/Rah7858",
       href: "https://github.com/Rah7858",
     },
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 bg-secondary/30">
+    <section id="contact" className="py-20 px-4 bg-[#05011a]/20">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
