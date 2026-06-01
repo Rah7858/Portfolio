@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Background } from "@/components/portfolio/Background";
 import { CustomCursor } from "@/components/portfolio/CustomCursor";
@@ -13,28 +12,7 @@ import { AvailableBanner } from "@/components/portfolio/AvailableBanner";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Rahul Kumar | Full Stack Developer & AI Engineer" },
-      {
-        name: "description",
-        content:
-          "Portfolio of Rahul Kumar — Full Stack Developer and AI Engineer building AI-powered applications with React, Node.js, Python and PostgreSQL.",
-      },
-      { name: "keywords", content: "Rahul Kumar, Full Stack Developer, AI Engineer, React, Node.js, Python, PostgreSQL, Portfolio" },
-      { property: "og:title", content: "Rahul Kumar | Full Stack Developer & AI Engineer" },
-      { property: "og:description", content: "AI-powered full stack applications. React • Node.js • Python • PostgreSQL." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://rkdev.online" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
-  component: Index,
-});
-
-function Index() {
+export default function App() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
