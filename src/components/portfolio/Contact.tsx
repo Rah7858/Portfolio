@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { Mail, Phone, Linkedin, Github, MapPin, Send, Download, CheckCircle2 } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import cvAsset from "@/assets/Rahul_Kumar_CV.pdf.asset.json";
+import emailjs from "@emailjs/browser";
 
 const contactItems = [
   { icon: Mail, label: "Email", value: "rahul.work1017@gmail.com", href: "mailto:rahul.work1017@gmail.com", color: "#7C3AED" },
@@ -12,44 +13,31 @@ const contactItems = [
   { icon: MapPin, label: "Location", value: "Jharkhand, India", href: "#", color: "#F97316" },
 ];
 
-// 👉 Replace with your Formspree form ID from https://formspree.io
-// e.g. "xrgjwknb" — then your endpoint becomes https://formspree.io/f/xrgjwknb
-const FORMSPREE_ID = "YOUR_FORMSPREE_ID";
-const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
-
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    // Fallback to mailto if Formspree isn't configured yet
-    if (FORMSPREE_ID === "YOUR_FORMSPREE_ID") {
-      const subject = encodeURIComponent(String(data.get("subject") || "Portfolio inquiry"));
-      const body = encodeURIComponent(
-        `From: ${data.get("name")} <${data.get("email")}>\n\n${data.get("message")}`,
-      );
-      window.location.href = `mailto:rahul.work1017@gmail.com?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setStatus("sending");
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+
+    emailjs
+      .sendForm(
+        "service_17sjhrc",
+        "template_xzfytoe",
+        e.currentTarget,
+        "o4p_zUzCvl8_fs3lj"
+      )
+      .then(() => {
+        alert("✅ Message sent successfully! I will get back to you soon.");
+        e.currentTarget.reset();
+        setStatus("sent");
+        setTimeout(() => setStatus("idle"), 4000);
+      })
+      .catch(() => {
+        alert("❌ Failed to send message. Please try again.");
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
       });
-      if (!res.ok) throw new Error("Failed");
-      form.reset();
-      setStatus("sent");
-      setTimeout(() => setStatus("idle"), 4000);
-    } catch {
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 4000);
-    }
   };
 
   return (
@@ -108,7 +96,7 @@ export function Contact() {
 
           {/* Right */}
           <motion.form
-            onSubmit={onSubmit}
+            onSubmit={sendEmail}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -121,14 +109,15 @@ export function Contact() {
               style={{ background: "#06B6D4" }} />
 
             <div className="relative grid sm:grid-cols-2 gap-4">
-              <Field label="Name" name="name" placeholder="Your name" required />
-              <Field label="Email" name="email" type="email" placeholder="you@email.com" required />
+              <Field label="Name" name="from_name" placeholder="Your name" required />
+              <Field label="Email" name="from_email" type="email" placeholder="you@email.com" required />
               <div className="sm:col-span-2">
                 <Field label="Subject" name="subject" placeholder="Project inquiry..." required />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs uppercase tracking-widest text-white/40 font-mono mb-2">Message</label>
                 <textarea
+                  name="message"
                   required
                   maxLength={1000}
                   rows={5}
