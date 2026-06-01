@@ -109,11 +109,9 @@ export function Contact() {
               style={{ background: "#06B6D4" }} />
 
             <div className="relative grid sm:grid-cols-2 gap-4">
+              <input type="hidden" name="subject" value="Portfolio Contact" />
               <Field label="Name" name="from_name" placeholder="Your name" required />
               <Field label="Email" name="from_email" type="email" placeholder="you@email.com" required />
-              <div className="sm:col-span-2">
-                <Field label="Subject" name="subject" placeholder="Project inquiry..." required />
-              </div>
               <div className="sm:col-span-2">
                 <label className="block text-xs uppercase tracking-widest text-white/40 font-mono mb-2">Message</label>
                 <textarea
