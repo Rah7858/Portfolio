@@ -3,7 +3,6 @@ import { motion, useMotionValue } from "motion/react";
 import { ArrowDown, Download, Github, Linkedin, Mail } from "lucide-react";
 import { ParticleField } from "./ParticleField";
 import { MagneticButton } from "./MagneticButton";
-import cvAsset from "@/assets/Rahul_Kumar_CV.pdf.asset.json";
 
 const roles = [
   "Full Stack Developer",
@@ -152,7 +151,7 @@ export function Hero() {
               View My Work
             </MagneticButton>
             <MagneticButton
-              href={cvAsset.url}
+              href="/Rahul_Kumar_CV.pdf"
               download="Rahul_Kumar_CV.pdf"
               className="border-gradient-primary relative rounded-full px-7 py-3.5 text-sm font-semibold text-white inline-flex items-center gap-2 hover:bg-white/5 transition-colors"
             >

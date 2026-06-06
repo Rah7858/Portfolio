@@ -2,7 +2,6 @@ import { motion } from "motion/react";
 import { useState, type FormEvent } from "react";
 import { Mail, Phone, Linkedin, Github, MapPin, Send, Download, CheckCircle2 } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
-import cvAsset from "@/assets/Rahul_Kumar_CV.pdf.asset.json";
 import emailjs from "@emailjs/browser";
 
 const contactItems = [
@@ -146,7 +145,7 @@ export function Contact() {
 
         <div className="mt-14 flex justify-center">
           <a
-            href={cvAsset.url}
+            href="/Rahul_Kumar_CV.pdf"
             download="Rahul_Kumar_CV.pdf"
             data-cursor-hover
             className="group inline-flex items-center gap-3 rounded-full px-8 py-4 font-semibold text-white bg-gradient-secondary shadow-[0_0_40px_-10px_#EC489999] hover:scale-105 transition-transform"
